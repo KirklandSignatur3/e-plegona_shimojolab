@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - RtBall
+  - Rt3D
+  - GUIPostProcess
+  - 3DPostProcess
+  - PostProcess
+  - 
+  - Rt3D1
+  - Rt3D2
+  - Rt3D3
+  - Rt3D4
+  - Rt3D5
+  - Rt3D6
+  - Rt3D7
+  - 
+  - 
+  - Rt3D10
+  - Rt3D11
+  - Rt3D12
+  - Rt3D13
+  - 
+  - 
+  - 
+  - 
+  - CirclePattern
+  - SpherePattern
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

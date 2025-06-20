@@ -1,0 +1,341 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!200 &20000000
+ShaderVariantCollection:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: NewShaderVariants
+  m_Shaders:
+  - first: {fileID: 64, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: SHADOWS_SINGLE_CASCADE SHADOWS_SPLIT_SPHERES
+        passType: 0
+      - keywords: SHADOWS_SPLIT_SPHERES
+        passType: 0
+  - first: {fileID: 10770, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: UNITY_UI_ALPHACLIP
+        passType: 0
+  - first: {fileID: 66, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: DIRECTIONAL LIGHTPROBE_SH
+        passType: 4
+      - keywords: DIRECTIONAL
+        passType: 5
+      - keywords: 
+        passType: 8
+  - first: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 106, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: _SUNDISK_SIMPLE
+        passType: 0
+  - first: {fileID: 9000, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9001, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9002, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9003, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9004, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9007, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9101, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9103, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 7b715b7157386e045a51ba5953924ad8, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 0
+      - keywords: PROCEDURAL_INSTANCING_ON
+        passType: 0
+  - first: {fileID: 4800000, guid: 4ca1f29c2d0f6644095651594bcffb81, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: PROCEDURAL_INSTANCING_ON
+        passType: 0
+  - first: {fileID: 4800000, guid: bc65170c051b0724287a7f1636d87573, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 79d493aa7da1a5440bc9ef9e8c332c39, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: INSTANCING_ON
+        passType: 0
+      - keywords: PROCEDURAL_INSTANCING_ON
+        passType: 0
+  - first: {fileID: 4800000, guid: 0736a017ee88a8741b09e7382339ab99, type: 3}
+    second:
+      variants:
+      - keywords: INNER_RADIUS INSTANCING_ON
+        passType: 0
+      - keywords: INNER_RADIUS INSTANCING_ON SECTOR
+        passType: 0
+      - keywords: INNER_RADIUS
+        passType: 13
+      - keywords: INNER_RADIUS SECTOR
+        passType: 13
+  - first: {fileID: 4800000, guid: 66c26c3ae28812f4b944de755f3eab0c, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: fa2bd8946a4ba05499b4541bbe8c236a, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 7a99726e01e321944aa39a4708e78216, type: 3}
+    second:
+      variants:
+      - keywords: DIRECTIONAL
+        passType: 4
+      - keywords: DIRECTIONAL INSTANCING_ON LIGHTPROBE_SH
+        passType: 4
+      - keywords: DIRECTIONAL LIGHTPROBE_SH PROCEDURAL_INSTANCING_ON
+        passType: 4
+      - keywords: DIRECTIONAL LIGHTPROBE_SH PROCEDURAL_INSTANCING_ON SHADOWS_SCREEN
+        passType: 4
+      - keywords: DIRECTIONAL
+        passType: 5
+      - keywords: POINT
+        passType: 5
+      - keywords: PROCEDURAL_INSTANCING_ON
+        passType: 8
+      - keywords: PROCEDURAL_INSTANCING_ON SHADOWS_DEPTH
+        passType: 8
+      - keywords: SHADOWS_DEPTH
+        passType: 8
+      - keywords: 
+        passType: 10
+  - first: {fileID: 4800000, guid: 08972cbecdebc6944b65c598dec5cb43, type: 3}
+    second:
+      variants:
+      - keywords: CAP_ROUND INSTANCING_ON
+        passType: 0
+      - keywords: CAP_ROUND
+        passType: 13
+  - first: {fileID: 4800000, guid: 5654cceb11498cf44b31db51d1591831, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: INSTANCING_ON
+        passType: 0
+      - keywords: PROCEDURAL_INSTANCING_ON
+        passType: 0
+  - first: {fileID: 4800000, guid: cf804626b59a7a843bd8772f1746e2d5, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: INSTANCING_ON
+        passType: 0
+      - keywords: PROCEDURAL_INSTANCING_ON
+        passType: 0
+  - first: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: c1e1d3119c6fd4646aea0b4b74cacc1a, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: cdbdb71de5f9c454b980f6d0e87f0afb, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 4bf4cff0d0bac3d43894e2e8839feb40, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: f75014305794b3948a3c6d5ccd550e05, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 0d8afcb51cc9f0349a6d190da929b838, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 81af42a93ade3dd46a9b583d4eec76d6, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 382151503e2a43a4ebb7366d1632731d, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: BLOOM_LOW
+        passType: 0
+      - keywords: BLOOM_LOW FINALPASS
+        passType: 0
+      - keywords: COLOR_GRADING_LDR_2D GRAIN
+        passType: 0
+  - first: {fileID: 4800000, guid: 7ad194cbe7d006f4bace915156972026, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: de7f3ac52268a194383c7d62c2a343c1, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: b78975af77de3d54ab3803a8d5ef02b0, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 9839189d918374a318d397a86e90aa73, type: 3}
+    second:
+      variants:
+      - keywords: SOFTMASK_EDITOR
+        passType: 0
+  - first: {fileID: 4800000, guid: 2933b413a51fc4ff3a83c7ef4177ae84, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 15a4e0ca0b444ba42af4b3e4bb432837, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 5ef80a14a7302ec4f91a13ed7c7f8898, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 1e3b9829d99c34745937b9f64e528082, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 61a7f02393656004dadb3a636e808d9b, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: INSTANCING_ON
+        passType: 0
+      - keywords: PROCEDURAL_INSTANCING_ON
+        passType: 0
+  - first: {fileID: 4800000, guid: fdba67ed5d6e5dd4b8bc4a8402400d38, type: 3}
+    second:
+      variants:
+      - keywords: DIRECTIONAL
+        passType: 4
+      - keywords: DIRECTIONAL INSTANCING_ON LIGHTPROBE_SH
+        passType: 4
+      - keywords: DIRECTIONAL LIGHTPROBE_SH PROCEDURAL_INSTANCING_ON
+        passType: 4
+      - keywords: DIRECTIONAL LIGHTPROBE_SH PROCEDURAL_INSTANCING_ON SHADOWS_SCREEN
+        passType: 4
+      - keywords: DIRECTIONAL
+        passType: 5
+      - keywords: POINT
+        passType: 5
+      - keywords: PROCEDURAL_INSTANCING_ON
+        passType: 8
+      - keywords: PROCEDURAL_INSTANCING_ON SHADOWS_DEPTH
+        passType: 8
+      - keywords: SHADOWS_DEPTH
+        passType: 8
+      - keywords: 
+        passType: 10
+      - keywords: 
+        passType: 11
+  - first: {fileID: 4800000, guid: b756c574a2b384149821b3b8e004d0c3, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: INSTANCING_ON
+        passType: 0
+      - keywords: PROCEDURAL_INSTANCING_ON
+        passType: 0
+  - first: {fileID: 4800000, guid: 71f7aa35f2530fe42a17557cedb55647, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: INSTANCING_ON
+        passType: 0
+      - keywords: PROCEDURAL_INSTANCING_ON
+        passType: 0
+  - first: {fileID: 4800000, guid: 3bf7cc17b641d9f43bd2eafe51523c6b, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: INSTANCING_ON
+        passType: 0
+      - keywords: PROCEDURAL_INSTANCING_ON
+        passType: 0
+  - first: {fileID: 4800000, guid: 57b0b1c83ee68a84182816e0889bcf88, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: INSTANCING_ON
+        passType: 0
+      - keywords: PROCEDURAL_INSTANCING_ON
+        passType: 0

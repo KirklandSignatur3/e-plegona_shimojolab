@@ -1,0 +1,75 @@
+#pragma kernel KernelKakuhenEdgesInit
+#pragma kernel KernelKakuhenEdgesUpdate
+
+#include "UnityCG.cginc"
+#include "Assets/CjLib/Shader/Noise/RandomNoise.cginc"
+#include "Assets/CjLib/Shader/Math/Quaternion.cginc"
+#include "Assets/CurlNoise/Shader/CurlNoise.cginc"
+struct Particle 
+{
+	float3 velocity;
+	float3 position;
+	float3 position2;
+	float3 scale;
+	float3 scale2;
+	float4 rotate;
+	float4 color;
+	float4 color2;
+	float emission;
+	int life;
+	int death;
+	float unique;
+};
+
+RWStructuredBuffer<Particle> particlesBuffer;
+
+uint numParticles;
+float4 offsetPos;
+float deltaTime;
+float noiseTime;
+float beatReaction;
+
+float random(float2 uv)
+{
+	return frac(sin(dot(uv, float2(12.9898, 78.233))) * 43758.5453123);
+}
+
+[numthreads(8, 1, 1)]
+void KernelKakuhenEdgesInit(uint id : SV_DispatchThreadID)
+{
+	particlesBuffer[id].velocity = float3(0.0, 0.0, 10000.0);
+	particlesBuffer[id].position = offsetPos;
+	particlesBuffer[id].scale = float3(0.0, 0.0, 0.0);
+	particlesBuffer[id].rotate = quat_identity();
+	particlesBuffer[id].life = 0;
+}
+
+[numthreads(8,1,1)]
+void KernelKakuhenEdgesUpdate(uint id : SV_DispatchThreadID)
+{
+	if(particlesBuffer[id].death == 0)
+	{
+		particlesBuffer[id].velocity = float3(0.0, 0.0, 0.0);
+		particlesBuffer[id].position = offsetPos + float3(0.0, 0.0, 0.0);
+		particlesBuffer[id].scale = float3(0.0, 0.0, 0.0);
+		particlesBuffer[id].rotate = quat_identity();
+	}
+	else
+	{
+		particlesBuffer[id].life--;
+
+		if(particlesBuffer[id].life <= 0) particlesBuffer[id].scale += (float3(0,0,0) - particlesBuffer[id].scale) * 0.01;
+		else particlesBuffer[id].scale += (particlesBuffer[id].scale2 - particlesBuffer[id].scale) * 0.01;
+		
+		if(particlesBuffer[id].life <= 0 && length(particlesBuffer[id].scale) < 0.01) particlesBuffer[id].death = 0;
+		else particlesBuffer[id].death = 1;
+
+		particlesBuffer[id].emission = (sin(_Time * 250 + particlesBuffer[id].unique * 100) * 0.5 + 0.5);
+
+		float speed = 0.0025;
+		float noiseScale = 0.2;
+		float persistence = 1;
+		particlesBuffer[id].velocity = curlNoise(particlesBuffer[id].position * noiseScale, noiseTime, persistence) * speed;
+		particlesBuffer[id].position += particlesBuffer[id].velocity;
+	}
+}

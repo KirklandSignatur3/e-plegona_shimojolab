@@ -1,0 +1,151 @@
+#pragma kernel KernelParticlesInit
+#pragma kernel KernelParticlesUpdate
+#pragma kernel KernelParticlesGravityUpdate
+#pragma kernel KernelParticlesCollisionUpdate
+
+#include "UnityCG.cginc"
+#include "Assets/CjLib/Shader/Noise/RandomNoise.cginc"
+#include "Assets/CjLib/Shader/Math/Quaternion.cginc"
+#include "Assets/CurlNoise/Shader/CurlNoise.cginc"
+struct Particle 
+{
+	float3 velocity;
+	float3 position;
+	float3 position2;
+	float3 scale;
+	float3 scale2;
+	float4 rotate;
+	float4 color;
+	float4 color2;
+	float4 color3;
+	float emission;
+	int life;
+	int death;
+	float unique;
+};
+
+RWStructuredBuffer<Particle> particlesBuffer;
+
+uint numParticles;
+float4 offsetPos;
+float deltaTime;
+float centerMass;
+float centerMass2;
+float limit;
+float noiseTime;
+float beatReaction;
+float kakuhen;
+float scale;
+
+float random(float2 uv)
+{
+	return frac(sin(dot(uv, float2(12.9898, 78.233))) * 43758.5453123);
+}
+
+[numthreads(8, 1, 1)]
+void KernelParticlesInit(uint id : SV_DispatchThreadID)
+{
+	particlesBuffer[id].velocity = float3(0.0, 0.0, 10000.0);
+	particlesBuffer[id].position = offsetPos;
+	particlesBuffer[id].scale = float3(0.0, 0.0, 0.0);
+	particlesBuffer[id].rotate = quat_identity();
+	particlesBuffer[id].life = 0;
+}
+
+[numthreads(8,1,1)]
+void KernelParticlesUpdate(uint id : SV_DispatchThreadID)
+{
+	if(particlesBuffer[id].death <= 0)
+	{
+		particlesBuffer[id].velocity = float3(0.0, 0.0, 0.0);
+		particlesBuffer[id].position = offsetPos + float3(0.0, 0.0, -1000.0);
+		particlesBuffer[id].scale = float3(0.0, 0.0, 0.0);
+		particlesBuffer[id].rotate = quat_identity();
+	}
+	else
+	{
+		if(particlesBuffer[id].life <= 0) particlesBuffer[id].scale += (float3(0,0,0) - particlesBuffer[id].scale) * 0.3;
+		else particlesBuffer[id].scale += (particlesBuffer[id].scale2 * (scale * 0.5 + 0.4) - particlesBuffer[id].scale) * 0.3;
+		particlesBuffer[id].scale *= ((beatReaction * 0.3 + 1.0)) * 0.5 + 0.5;
+		particlesBuffer[id].emission = (sin(_Time * 300 + particlesBuffer[id].unique * 100) * 0.5 + 0.5 ) * kakuhen * 0.5;// + 0.5;
+		
+		if(particlesBuffer[id].life <= 0 && length(particlesBuffer[id].scale) < 0.001) particlesBuffer[id].death = 0;
+		else  particlesBuffer[id].death = 1;
+
+		float3 delta = float3(0.0, 0.0, 0.0) - particlesBuffer[id].position;
+		delta *= float3(1.0, 1.0, 0.0);
+		float attraction = 0.1;
+		float speed = 0.01;
+		float scale = 0.1;
+		float noiseScale = 0.2;
+		float persistence = 1;
+		particlesBuffer[id].velocity = curlNoise(particlesBuffer[id].position * noiseScale, noiseTime, persistence) * speed * ((1.0 - centerMass) * 0.5);
+		particlesBuffer[id].velocity += delta * -0.005 * (1.0 - centerMass);
+		particlesBuffer[id].position += particlesBuffer[id].velocity;
+	}
+}
+
+[numthreads(8,1,1)] 
+void KernelParticlesGravityUpdate(uint id : SV_DispatchThreadID)
+{
+	if(particlesBuffer[id].death > 0)
+	{
+		particlesBuffer[id].velocity = (particlesBuffer[id].position - particlesBuffer[id].position2) / deltaTime;
+		float3 direction = offsetPos - particlesBuffer[id].position;
+		float distance = length(direction);
+		distance *= distance;
+		float gravity = (40+random(float2(id+noiseTime, id))*40) / distance + random(float2(id+noiseTime, id))*10;
+		gravity *= centerMass;
+		particlesBuffer[id].velocity += (direction * gravity) * deltaTime;
+		float limit = distance * 0.5 + beatReaction * 3;
+		particlesBuffer[id].velocity = min(particlesBuffer[id].velocity, float3(limit, limit, limit));
+		particlesBuffer[id].velocity = max(particlesBuffer[id].velocity, float3(-limit, -limit, -limit));
+		particlesBuffer[id].position2 = particlesBuffer[id].position;
+		particlesBuffer[id].position += particlesBuffer[id].velocity * deltaTime;
+	}
+}
+
+[numthreads(8,1,1)]
+void KernelParticlesCollisionUpdate(uint id : SV_DispatchThreadID)
+{
+	if(particlesBuffer[id].death > 0)
+	{
+		for(uint i = 0; i < numParticles; i++)
+		{
+			if(i != id && particlesBuffer[id].life > 0)
+			{
+				float3 a = particlesBuffer[id].position;
+				float3 b = particlesBuffer[i].position;
+				float3 ab = b - a;
+				float distance = length(ab);
+				float3 direction = normalize(ab);
+				float as = max(particlesBuffer[id].scale.x * 0.5, 0.4 * (scale * 0.5 + 0.5));
+				float bs = max(particlesBuffer[i].scale.x * 0.5, 0.4 * (scale * 0.5 + 0.5));
+				float abs = as + bs;
+				if (distance <= abs)
+				{
+					a -= (abs - distance) * direction * as / abs;
+					b += (abs - distance) * direction * bs / abs;
+				}
+				if(centerMass == 1 && length(a) > 4.5) a = normalize(a) * 4.5;
+				if(centerMass == 1 && length(b) > 4.5) b = normalize(b) * 4.5;
+				particlesBuffer[id].position = a;
+				particlesBuffer[i].position = b;
+			}
+		}
+
+		//center.
+		float3 a = particlesBuffer[id].position;
+		float3 ab = offsetPos - a;
+		float distance = length(ab);
+		float3 direction = normalize(ab);
+		float as = particlesBuffer[id].scale.x * 0.5;
+		float abs = as + (scale * 0.4 + 0.25);
+		if (distance <= abs)
+		{
+			a -= (abs - distance) * direction * as / abs;
+		}
+		
+		particlesBuffer[id].position = a;
+	}
+}
