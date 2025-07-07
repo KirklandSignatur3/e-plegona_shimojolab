@@ -108,8 +108,10 @@ public class ScoreCalculator : MonoBehaviour
 			return Hit.Perfect;
 		else if (gap < config.hitArea[(int)Hit.Nice])
 			return Hit.Nice;
-		else
+		else if (gap < config.hitArea[(int)Hit.Good])
 			return Hit.Good;
+		else
+			return Hit.None;
 	}
 
 	public static float CalcBalance(List<int> countP1, List<int> countP2)
