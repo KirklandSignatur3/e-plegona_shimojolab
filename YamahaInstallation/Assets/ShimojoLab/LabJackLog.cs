@@ -58,7 +58,7 @@ public class LabJackLog : MonoBehaviour
 
         //tw.WriteLine("time, player Y, p1 jump, p2 jump, p1 off time press, p2 off time press, hit obstacle, pass obstacle, " +
         //            "start game, end game, coin Y, bg_change_white, bg_change_black, AEP");    //writing the headings
-        tw.WriteLine("time, P1_CREATE_NOTE, P2_CREATE_NOTE, P1_MISS_NOTE," +
+        tw.WriteLine("time, P1_CREATE_NOTE, P2_CREATE_NOTE, P1_CREATE_NOTE_END, P2_CREATE_NOTE_END, P1_MISS_NOTE," +
             " P2_MISS_NOTE, P1_GOOD, P1_NICE, P1_PERFECT, P2_GOOD, P2_NICE, P2_PERFECT, START_GAME");    ///writing the headings
 
 
@@ -202,7 +202,6 @@ public class LabJackLog : MonoBehaviour
                 tw.Close();
                 Debug.Log(events[eventType]);
                 SendLabJackSignal(signalDelay, 6);
-                SendLabJackSignal(signalDelay, 7);
 
                 break;
         }
