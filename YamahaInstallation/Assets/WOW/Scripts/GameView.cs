@@ -441,7 +441,17 @@ public class GameView : IView
 	public void TapEnd(Pad pad, Note note)
 	{
 		note.TapEnd();
-	}
+        if ((int)note.pad.player == 1)
+        {
+            LJScript.LogEvent(timerView.GetElapsedTime(), LJScript.P1_TAP_END);
+
+        }
+        else if ((int)note.pad.player == 0)
+        {
+            LJScript.LogEvent(timerView.GetElapsedTime(), LJScript.P2_TAP_END);
+
+        }
+    }
 
 	/// <summary>
 	/// Noteを作成.    
@@ -540,16 +550,7 @@ public class GameView : IView
 		//stop ring.
 		abletonManager.NoteOff(note.note);
         // CSV LOGGING
-        if ((int)note.pad.player == 1)
-        {
-            LJScript.LogEvent(timerView.GetElapsedTime(), LJScript.P1_TAP_END);
 
-        }
-        else if ((int)note.pad.player == 0)
-        {
-            LJScript.LogEvent(timerView.GetElapsedTime(), LJScript.P2_TAP_END);
-
-        }
 
     }
 
