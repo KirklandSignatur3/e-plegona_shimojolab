@@ -45,10 +45,11 @@ public class LabJackLog : MonoBehaviour
         //filepath = "Desktop";
         //filepath = "C:\\Users\\Yamaha\\Desktop\\Shimojo_Log";
         filepath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\Log";
+        
+        Directory.CreateDirectory(filepath);
 
-        file = filepath + "\\" + filename + "_" + DateTime.Now.ToString("MMM-dd-yyyy,hh.mm.ss") + ".csv";
+        file = filepath + "\\" + filename + "_" + DateTime.Now.ToString("MMM_dd_yyyy_hh_mm_ss") + ".csv";
         Debug.Log("file name: " + file);
-
         TextWriter tw = new StreamWriter(file, false); //false bc we are wiping the file?
 
         //tw.WriteLine("time, player Y, p1 jump, p2 jump, p1 off time press, p2 off time press, hit obstacle, pass obstacle, " +
@@ -60,8 +61,7 @@ public class LabJackLog : MonoBehaviour
 
         tw.Close();
         Debug.Log("csv created");
-        /*        TextWriter tw = new StreamWriter(filename, true);
-        */
+
     }
 
     // Start is called before the first frame update
