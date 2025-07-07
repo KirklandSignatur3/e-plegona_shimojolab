@@ -447,7 +447,7 @@ public class GameView : IView
 		else hit = ScoreCalculator.CalcHit(note.GetGap(0.5));
 		if (note.hit == Hit.None) note.hit = hit;
 
-		if ((int)note.pad.player == 0) //MM, log the type of hit
+		if ((int)note.pad.player == 1) //MM, log the type of hit // chagned from 0 to 1 (7/7/25)
 		{ // IF PLAYER 1
             switch (hit)
             {
