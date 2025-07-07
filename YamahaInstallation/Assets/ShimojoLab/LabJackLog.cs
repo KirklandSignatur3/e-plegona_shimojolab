@@ -18,8 +18,8 @@ public class LabJackLog : MonoBehaviour
     public string filename = "";
     public string file = "";
 
-    public int P1_CREATE_NOTE = 1;
-    public int P2_CREATE_NOTE = 2; 
+    public int P1_CREATE_NOTE_START = 1;
+    public int P2_CREATE_NOTE_START = 2; 
     public int P1_MISS_NOTE = 3;
     public int P2_MISS_NOTE = 4;
     public int P1_GOOD = 5;

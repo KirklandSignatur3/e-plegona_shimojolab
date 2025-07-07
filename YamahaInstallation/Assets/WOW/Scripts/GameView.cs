@@ -353,12 +353,12 @@ public class GameView : IView
 		
 		if ((int)pad.player == 0)
         {
-            LJScript.LogEvent(timerView.GetElapsedTime(), LJScript.P1_CREATE_NOTE);
+            LJScript.LogEvent(timerView.GetElapsedTime(), LJScript.P1_CREATE_NOTE_START);
 
         }
         else if ((int)pad.player == 1)
 		{
-            LJScript.LogEvent(timerView.GetElapsedTime(), LJScript.P2_CREATE_NOTE);
+            LJScript.LogEvent(timerView.GetElapsedTime(), LJScript.P2_CREATE_NOTE_START);
 
         }
 
@@ -413,7 +413,18 @@ public class GameView : IView
 
 		if (!isTutorial) ScoreCalculator.AddCreateScore(pad);
 
-	}
+        if ((int)pad.player == 0)
+        {
+            LJScript.LogEvent(timerView.GetElapsedTime(), LJScript.P1_CREATE_NOTE_END);
+
+        }
+        else if ((int)pad.player == 1)
+        {
+            LJScript.LogEvent(timerView.GetElapsedTime(), LJScript.P2_CREATE_NOTE_END);
+
+        }
+
+    }
 
 	/// <summary>
 	/// Noteを作成.    
