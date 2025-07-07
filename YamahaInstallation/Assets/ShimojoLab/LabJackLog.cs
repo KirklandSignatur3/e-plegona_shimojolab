@@ -31,11 +31,13 @@ public class LabJackLog : MonoBehaviour
     public int START_GAME = 11;
     public int P1_CREATE_NOTE_END = 12;
     public int P2_CREATE_NOTE_END = 13;
+    public int P1_TAP_END = 14;
+    public int P2_TAP_END = 15;
 
 
     public List<string> events = new List<string> { "time", "P1_CREATE_NOTE_START", "P2_CREATE_NOTE_START",
         "P1_CREATE_NOTE_END", "P2_CREATE_NOTE_END", "P1_MISS_NOTE", 
-        "P2_MISS_NOTE", "P1_GOOD", "P1_NICE", "P1_PERFECT", "P2_GOOD", "P2_NICE", "P2_PERFECT", "START_GAME", }; 
+        "P2_MISS_NOTE", "P1_GOOD", "P1_NICE", "P1_PERFECT", "P2_GOOD", "P2_NICE", "P2_PERFECT", "P1_TAP_END", "P2_TAP_END", "START_GAME", }; 
 
     private TextWriter tw;
 
@@ -59,7 +61,7 @@ public class LabJackLog : MonoBehaviour
         //tw.WriteLine("time, player Y, p1 jump, p2 jump, p1 off time press, p2 off time press, hit obstacle, pass obstacle, " +
         //            "start game, end game, coin Y, bg_change_white, bg_change_black, AEP");    //writing the headings
         tw.WriteLine("time, P1_CREATE_NOTE, P2_CREATE_NOTE, P1_CREATE_NOTE_END, P2_CREATE_NOTE_END, P1_MISS_NOTE," +
-            " P2_MISS_NOTE, P1_GOOD, P1_NICE, P1_PERFECT, P2_GOOD, P2_NICE, P2_PERFECT, START_GAME");    ///writing the headings
+            " P2_MISS_NOTE, P1_GOOD, P1_NICE, P1_PERFECT, P2_GOOD, P2_NICE, P2_PERFECT, P1_TAP_END, P2_TAP_END, START_GAME");    ///writing the headings
 
 
 
@@ -107,13 +109,13 @@ public class LabJackLog : MonoBehaviour
         switch (eventType)
         {
             case 1: // p1 create note
-                tw.WriteLine(time + ", " + "1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0");    //writing the headings 
+                tw.WriteLine(time + ", " + "1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0");    //writing the headings 
                 tw.Close();
                 Debug.Log(events[eventType]);
                 SendLabJackSignal(signalDelay, eventType - 1);
                 break;
             case 2: // p2 create note start
-                tw.WriteLine(time + ", " + "0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0");
+                tw.WriteLine(time + ", " + "0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0");
                 tw.Close();
 
                 Debug.Log(events[eventType]);
@@ -121,13 +123,13 @@ public class LabJackLog : MonoBehaviour
 
                 break;
             case 12: // p1 create note END
-                tw.WriteLine(time + ", " + "0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0");    //writing the headings 
+                tw.WriteLine(time + ", " + "0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0");    //writing the headings 
                 tw.Close();
                 Debug.Log(events[eventType]);
                 SendLabJackSignal(signalDelay, eventType - 1);
                 break;
             case 13: // p2 create note END
-                tw.WriteLine(time + ", " + "0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0");
+                tw.WriteLine(time + ", " + "0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0");
                 tw.Close();
 
                 Debug.Log(events[eventType]);
@@ -135,7 +137,7 @@ public class LabJackLog : MonoBehaviour
 
                 break;
             case 3: // p1 miss note
-                tw.WriteLine(time + ", " + "0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0");
+                tw.WriteLine(time + ", " + "0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0");
                 tw.Close();
 
                 Debug.Log(events[eventType]);
@@ -143,7 +145,7 @@ public class LabJackLog : MonoBehaviour
 
                 break;
             case 4: // p2 miss note
-                tw.WriteLine(time + ", " + "0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0");
+                tw.WriteLine(time + ", " + "0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0");
                 tw.Close();
 
                 Debug.Log(events[eventType]);
@@ -151,7 +153,7 @@ public class LabJackLog : MonoBehaviour
 
                 break;
             case 5: // p1 hit: good nice perfect
-                tw.WriteLine(time + ", " + "0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0");
+                tw.WriteLine(time + ", " + "0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0");
                 tw.Close();
 
                 Debug.Log(events[eventType]);
@@ -159,7 +161,7 @@ public class LabJackLog : MonoBehaviour
 
                 break;
             case 6: // p1 nice
-                tw.WriteLine(time + ", " + "0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0");
+                tw.WriteLine(time + ", " + "0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0");
                 tw.Close();
 
                 Debug.Log(events[eventType]);
@@ -168,7 +170,7 @@ public class LabJackLog : MonoBehaviour
                 break;
             case 7: //p1 perfect
 
-                tw.WriteLine(time + ", " + "0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0");
+                tw.WriteLine(time + ", " + "0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0");
                 tw.Close();
 
                 Debug.Log(events[eventType]);
@@ -176,7 +178,7 @@ public class LabJackLog : MonoBehaviour
 
                 break;
             case 8: // p2 hit: good 
-                tw.WriteLine(time + ", " + "0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0");
+                tw.WriteLine(time + ", " + "0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0");
                 tw.Close();
 
                 Debug.Log(events[eventType]);
@@ -184,21 +186,38 @@ public class LabJackLog : MonoBehaviour
 
                 break;
             case 9: // p2 nice
-                tw.WriteLine(time + ", " + "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0");
+                tw.WriteLine(time + ", " + "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0");
                 tw.Close();
                 Debug.Log(events[eventType]);
                 SendLabJackSignal(signalDelay, 5);
 
                 break;
             case 10: // p2 perfect
-                tw.WriteLine(time + ", " + "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0");
+                tw.WriteLine(time + ", " + "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0");
                 tw.Close();
                 Debug.Log(events[eventType]);
                 SendLabJackSignal(signalDelay, 5);
 
                 break;
+
+            case 14: // P1_TAP_END, 
+                tw.WriteLine(time + ", " + "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0");
+                tw.Close();
+                Debug.Log(events[eventType]);
+                SendLabJackSignal(signalDelay, 6);
+
+                break;
+
+
+            case 15: // P2_TAP_END,
+                tw.WriteLine(time + ", " + "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0");
+                tw.Close();
+                Debug.Log(events[eventType]);
+                SendLabJackSignal(signalDelay, 6);
+
+                break;
             case 11: // start game
-                tw.WriteLine(time + ", " + "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0");
+                tw.WriteLine(time + ", " + "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0");
                 tw.Close();
                 Debug.Log(events[eventType]);
                 SendLabJackSignal(signalDelay, 6);
